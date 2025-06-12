@@ -127,4 +127,9 @@ public class LinkedList {
         l1.printll();
 
     }
+
+    public LinkedList.Node mergesort(LinkedList.Node head2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mergesort'");
+    }
 }
