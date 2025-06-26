@@ -121,6 +121,28 @@ public class BST {
 
     }
 
+    //------------------------------------------------------------- PRINT IN RANGE ---------------------------------------------
+
+    public static void printinrange(Node root, int k1, int k2 ) {
+
+        if ( root == null ) {
+            return;
+        }
+
+        if ( k1 <= root.data && root.data <= k2 ) {
+
+            printinrange(root.left, k1, k2);
+            System.out.print(root.data+ " ");
+            printinrange(root.right, k1, k2);
+
+        } else if ( root.data > k2 ) {
+            printinrange(root.right, k1, k2);
+        } else {
+            printinrange(root.left, k1, k2);
+        }
+
+    } 
+
     public static void main ( String args[] ) {
         
         // int values[] = { 5, 1, 3, 4, 2, 7 };
@@ -142,9 +164,11 @@ public class BST {
         //     System.out.println("Key not found");
         // }
 
-        deletenode(root, 8);
-        inorder(root);
-        System.out.println();
+        // deletenode(root, 8);
+        // inorder(root);
+        // System.out.println();
+
+        printinrange(root, 5, 10);
 
         
 
