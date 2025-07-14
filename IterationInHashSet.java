@@ -17,7 +17,7 @@ public class IterationInHashSet {
         System.out.println("Using Iteratior :");
         System.out.println() ;
 
-        Iterator it = cities.iterator() ;
+        Iterator<String> it = cities.iterator() ;
 
         while ( it.hasNext() ) {
 
