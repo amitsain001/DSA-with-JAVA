@@ -1,5 +1,4 @@
 import java.util.* ;
-import java.util.LinkedList;
 
 public class DFS {
 
@@ -50,29 +49,35 @@ public class DFS {
 
     }
 
-    public static void bst ( ArrayList<Edge> graph[] ) {
+    public static void dfs ( ArrayList<Edge> graph[] ) {
 
-        Queue<Integer> q = new LinkedList<>() ;
         boolean visit[] = new boolean[graph.length] ;
 
-        q.add(0) ;    // Starting Point 
+        for ( int i = 0 ; i < graph.length ; i++ ) {
 
-        while ( !q.isEmpty() ) {
-
-            int curr = q.remove() ;
-
-            if ( !visit[curr] ) {
-
-                System.out.print ( curr + " " ) ;
-                visit[curr] = true ;
-
-                for ( int i = 0 ; i < graph[curr].size() ; i++ ) {
-                    Edge e = graph[curr].get(i) ;
-                    q.add(e.dest) ;
-                }
+            if ( !visit[i] ) {
+                dfsutil(graph, i, visit);
             }
         }
     }
+
+    public static void dfsutil ( ArrayList<Edge> graph[] , int curr , boolean visit[] ) {
+
+        System.out.print (curr + " ") ;
+        visit[curr] = true ;
+
+        for ( int i = 0 ; i < graph[curr].size() ; i++ ) {
+            Edge e = graph[curr].get(i) ;
+
+            if ( !visit[e.dest] ) {
+
+                dfsutil(graph, e.dest, visit);
+
+            }
+        }
+
+    }
+
 
     public static void main ( String args[] ) {
 
@@ -83,7 +88,8 @@ public class DFS {
         ArrayList<Edge>[] graph = new ArrayList[v] ;
 
         creategraph(graph);
-        bst(graph);
+
+        dfs(graph);
 
     }
     

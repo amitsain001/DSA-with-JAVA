@@ -1,4 +1,5 @@
 import java.util.* ;
+import java.util.LinkedList;
 
 public class BFS {
 
@@ -49,23 +50,44 @@ public class BFS {
 
     }
 
-    public static void dfs ( ArrayList<Edge> graph[] , int curr , boolean visit[] ) {
+    // bfs function is for visited path checking
 
-        System.out.print (curr + " ") ;
-        visit[curr] = true ;
+    public static void bfs ( ArrayList<Edge> graph[] ) {
 
-        for ( int i = 0 ; i < graph[curr].size() ; i++ ) {
-            Edge e = graph[curr].get(i) ;
+        boolean visit[] = new boolean[graph.length] ;
 
-            if ( !visit[e.dest] ) {
-
-                dfs(graph, e.dest, visit);
-
+        for ( int i = 0 ; i < graph.length ; i++ ) {
+            if ( !visit[i] ) {
+                bfsutil (graph , visit) ;
             }
         }
 
     }
 
+    public static void bfsutil ( ArrayList<Edge> graph[] , boolean visit[] ) {
+
+        Queue<Integer> q = new LinkedList<>() ;
+
+        q.add(0) ;    // Starting Point 
+
+        while ( !q.isEmpty() ) {
+
+            int curr = q.remove() ;
+
+            if ( !visit[curr] ) {
+
+                System.out.print ( curr + " " ) ;
+                visit[curr] = true ;
+
+                for ( int i = 0 ; i < graph[curr].size() ; i++ ) {
+                    Edge e = graph[curr].get(i) ;
+                    q.add(e.dest) ;
+                }
+            }
+        }
+
+    }
+    
 
     public static void main ( String args[] ) {
 
@@ -76,8 +98,7 @@ public class BFS {
         ArrayList<Edge>[] graph = new ArrayList[v] ;
 
         creategraph(graph);
-
-        dfs(graph, 0, new boolean[v]);
+        bfs(graph);
 
     }
     
